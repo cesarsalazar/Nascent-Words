@@ -1,0 +1,8 @@
+- content_for :head do
+  %link{:rel => 'stylesheet', :href => '/stylesheets/index.css', :type => 'text/css'}
+#content
+  %h1 Create new document
+  %form{:method => 'POST'}
+    %label{:for => 'title'} Choose a title
+    %input.text{:type => 'text', :name => 'title'}
+    %input.submit{:type => 'submit', :value => 'Create Document'}

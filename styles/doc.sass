@@ -1,0 +1,32 @@
+@import 'global'
+
+body
+  background-color: $light_gray
+  
+  #content
+    @include box-shadow
+    background-color: $white
+    min-height: 850px
+    @include centered(850px)
+    h1
+      color: $black
+      padding: 50px
+      padding-bottom: 0
+      font-family: "Oswald", Helvetica, Arial, sans-serif
+      font-size: 30pt
+      text-align: center
+    textarea
+      width: 750px
+      min-height: 800px
+      padding: 50px
+      padding-top: 1em
+      
+      border: none
+      font-family: "Quattrocento", Georgia, serif
+      line-height: 1.4
+      font-size: 13pt
+      color: $black
+      outline: 0
+  
+  
+  
