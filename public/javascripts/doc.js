@@ -44,6 +44,8 @@ $(function(){
     if(typing == true){
       typing = false;
       saveNewVersion();
+      var wordcount = $('textarea').val().match(/\b/g).length/2;
+      var charcount = $('textarea').val().split('').length;
       $('body').addClass('slacking');
     }
   });
@@ -61,4 +63,16 @@ var saveNewVersion = function(){
       keystrokes = 0;
     }
   })
+}
+
+var wordCount = function(s){
+  s = trim(s);
+  return s.split(" ").length
+}
+
+var trim = function(s) {
+ s = s.replace(/(^\s*)|(\s*$)/gi,"");
+ s = s.replace(/[ ]{2,}/gi," ");
+ //s = s.replace(/\n /,"\n ");
+ return s;
 }
