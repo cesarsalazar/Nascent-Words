@@ -25,10 +25,10 @@ get '/' do
 end
 
 post '/' do
-  document = Document.new(:title => params[:title], :url => uuid, :friendly_url => params[:title].downcase.gsub(/[^a-z0-9]+/i, '-'))
-  document.versions.build(:text => '', :saved => Time.now)
-  raise 500 unless document.save!
-  redirect document.url
+  @document = Document.new(:title => params[:title], :url => uuid, :friendly_url => params[:title].downcase.gsub(/[^a-z0-9]+/i, '-'))
+  @document.versions.build(:text => '', :saved => Time.now)
+  raise 500 unless @document.save!
+  redirect @document.url
 end
 
 get '/:url' do
@@ -37,11 +37,13 @@ get '/:url' do
 end
 
 post '/:url' do
-  document = Document.where(:url => params[:url]).last
-  document.versions.build( :text => params[:text], :saved => Time.now )
-  raise 500 unless document.save!
+  puts params[:title]
+  @document = Document.where(:url => params[:url]).last
+  @document.set( :title => params[:title] ) if params[:title]
+  @document.versions.build( :text => params[:text], :saved => Time.now ) if params[:text]
+  raise 500 unless @document.save!
   content_type :json
-  return [:status => 200, :text => "Great success!"].to_json
+  return [:status => 200, :response => "Great success!", :title => @document.title].to_json
 end
 
 get '/stylesheets/*' do
