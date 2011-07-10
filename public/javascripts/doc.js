@@ -23,7 +23,6 @@ $(function(){
         success: function(response){
           $('h1').show().text( $('#title').val() );
           $('#title').remove();
-          console.log(response)
         }
       })
       
@@ -60,7 +59,6 @@ var saveNewVersion = function(){
     }},
     success: function(response){
       keystrokes = 0;
-      console.log(response);
     }
   })
 }

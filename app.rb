@@ -12,6 +12,8 @@ class Document
   key         :friendly_url,  String
   key         :title,         String
   many        :versions
+  
+  attr_accessible :title
 end
 
 class Version
@@ -37,9 +39,10 @@ get '/:url' do
 end
 
 post '/:url' do
-  puts params[:title]
+  puts params[:title] if params[:title]
   @document = Document.where(:url => params[:url]).last
   @document.set( :title => params[:title] ) if params[:title]
+  @document.reload
   @document.versions.build( :text => params[:text], :saved => Time.now ) if params[:text]
   raise 500 unless @document.save!
   content_type :json
