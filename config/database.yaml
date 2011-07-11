@@ -1,7 +1,7 @@
 development:
   host: localhost
   port: 27017
-  database: document_editor_dev2
+  database: document_editor_dev
   logfile: development.log
     
 production:

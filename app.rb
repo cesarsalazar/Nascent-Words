@@ -12,8 +12,6 @@ class Document
   key         :friendly_url,  String
   key         :title,         String
   many        :versions
-  
-  attr_accessible :title
 end
 
 class Version
