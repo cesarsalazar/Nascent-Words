@@ -1,6 +1,7 @@
 var typing = false;
 var sound = false;
 var keystrokes = 0;
+var editingTitle = false;
 
 $(function(){  
   
@@ -13,10 +14,11 @@ $(function(){
   $('h1').click(function(){
     $(this).after('<input type="text" class="text" id="title" name="title" value="'+$(this).text()+'"/>');
     $(this).hide();
+    editingTitle = true;
   });
   
   $('body').click(function(e){
-    if(e.target != $('#title')[0] && e.target != $('h1')[0]){
+    if(e.target != $('#title')[0] && e.target != $('h1')[0] && editingTitle){
       updateTitle();
     }
   })
@@ -81,6 +83,7 @@ var updateTitle = function(){
     success: function(response){
       $('h1').show().text( $('#title').val() );
       $('#title').remove();
+      editingTitle = false;
     }
   })
 }
