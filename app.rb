@@ -37,7 +37,6 @@ get '/:url' do
 end
 
 post '/:url' do
-  puts params[:title] if params[:title]
   @document = Document.where(:url => params[:url]).last
   @document.set( :title => params[:title] ) if params[:title]
   @document.reload

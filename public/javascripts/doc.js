@@ -46,6 +46,8 @@ $(function(){
        });
       document.getElementById('audio'+num).play();
     };
+  }).click(function(){
+    $('body').removeClass('slacking');
   }).focus();
   
   $(document).mousemove(function(){
