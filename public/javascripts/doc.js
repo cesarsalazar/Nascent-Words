@@ -38,7 +38,16 @@ $(function(){
     if(keystrokes > 99){
       saveNewVersion();
     }
-  });
+  }).keypress(function(){
+    var num = keystrokes;
+    $('#content').append('<audio id="audio'+num+'" src="/audio/keystroke.mp3" preload="auto"/>');
+     document.getElementById('audio'+num).addEventListener('ended', function(){
+       $('#audio'+num).remove();
+     })
+    document.getElementById('audio'+num).play();
+    
+    
+  })
   
   $(document).mousemove(function(){
     if(typing == true){
