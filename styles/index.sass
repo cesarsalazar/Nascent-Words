@@ -1,1 +1,36 @@
 @import 'global'
+
+body
+  #content
+    @include main-content
+    h1
+      font-family: "Dancing Script", cursive
+      font-size: 5em
+      letter-spacing: 0
+      word-spacing: 0
+      font-weight: bold
+      margin-bottom: 0em
+    ol
+      padding: 1.5em
+      overflow: visible
+      list-style: outside decimal 
+      li
+        font-size: 1.5em
+        line-height: 1.5em
+        margin-bottom: 0.5em
+    form
+      background: $light_gray
+      padding: 0.75em
+      border: 1px solid darken($light_gray,10%)
+    input.text
+      font-size: 1.5em
+      font-family: "Merriweather", serif
+      padding: 0.5em
+      width: 25em
+    input.submit
+      @include round-corners(4px)
+      height: 3.9em
+      margin: 0
+      margin-left: 0.5em
+
+

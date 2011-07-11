@@ -1,8 +1,11 @@
 - content_for :head do
   %link{:rel => 'stylesheet', :href => '/stylesheets/index.css', :type => 'text/css'}
 #content
-  %h1 Create new document
+  %h1 Nascent Words
+  %ol
+    %li Pick a title for your text.
+    %li Enjoy a simple, beautiful word processor that makes sure your document saved at all times, keep track of the word count and alerts you when you're loosing focus.
+    %li There's no step three.  
   %form{:method => 'POST'}
-    %label{:for => 'title'} Choose a title
     %input.text{:type => 'text', :name => 'title'}
-    %input.submit{:type => 'submit', :value => 'Create Document'}
+    %input.submit{:type => 'submit', :value => 'Start Writing'}
