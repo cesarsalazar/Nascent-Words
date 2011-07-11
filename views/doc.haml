@@ -6,3 +6,10 @@
   %h1= @document.title
   %textarea= @document.versions.last.text
   %audio{:src => "/audio/keystroke.mp3", :preload => "auto"}
+#stats
+  #wordcount
+    %p.label Word count
+    %p.value 0
+  #charcount
+    %p.label Character count
+    %p.value 0

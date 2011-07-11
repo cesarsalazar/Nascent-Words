@@ -49,10 +49,10 @@ $(function(){
   $(document).mousemove(function(){
     if(typing){
       typing = false;
-      saveNewVersion();
-      var wordcount = $('textarea').val().match(/\b/g).length/2;
-      var charcount = $('textarea').val().split('').length;
+      $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
+      $('#charcount .value').text( $('textarea').val().split('').length );
       $('body').addClass('slacking');
+      saveNewVersion();
     }
   });
   

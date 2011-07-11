@@ -3,8 +3,9 @@
 body
   background-color: $light_gray
   &.slacking
-    background-color: $valid_light
-  
+    background-color: darken($gray,20%)
+    #stats
+      color: $white
   #content
     @include box-shadow(0px 3px 6px rgba(0,0,0,0.25))
     background-color: $white
@@ -54,5 +55,19 @@ body
     input.text
       font-family: "Lora", serif
   
+  #stats
+    font-family: "Metrophobic", sans-serif
+    position: fixed
+    width: 120px
+    right: 15px
+    top: 50px
+    color: $light_gray
+    p.label
+      font-size: 0.7em
+      text-transform: uppercase
+    p.value
+      font-weight: bold
+      font-size: 1.5em
+      margin-bottom: 1em
   
   
