@@ -1,15 +1,16 @@
 var typing = false;
-var sound = false;
 var keystrokes = 0;
 var editingTitle = false;
 
 $(function(){  
   
-  $('h1').mouseover(function(){
-    $(this).addClass('highlight');
-  }).mouseout(function(){
-    $(this).removeClass('highlight');
-  })
+  $('h1')
+    .mouseover(function(){
+      $(this).addClass('highlight');
+    })
+    .mouseout(function(){
+      $(this).removeClass('highlight');
+    });
   
   $('h1').click(function(){
     $(this).after('<input type="text" class="text" id="title" name="title" value="'+$(this).text()+'"/>');
@@ -21,48 +22,44 @@ $(function(){
     if(e.target != $('#title')[0] && e.target != $('h1')[0] && editingTitle){
       updateTitle();
     }
-  })
+  });
+  
   $('#title').live('keypress', function(event){
     if(event.keyCode == 13){
       updateTitle();
     }
-  })
+  });
   
-  $('textarea').autogrow().keyup(function(){
-    keystrokes += 1;
-    if(!typing){
-      typing = true;
-      //$('body').removeClass('slacking');
-    }
-    if(keystrokes > 99){
-      saveNewVersion();
-    }
-  }).keypress(function(){
-    $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
-    $('#charcount .value').text( $('textarea').val().split('').length );
-    if(sound){
-      var num = keystrokes;
-      $('#content').append('<audio id="audio'+num+'" src="/audio/keystroke.mp3" preload="auto"/>');
-       document.getElementById('audio'+num).addEventListener('ended', function(){
-         $('#audio'+num).remove();
-       });
-      document.getElementById('audio'+num).play();
-    };
-  }).click(function(){
-    $('body').removeClass('slacking');
-  }).focus().keypress();
+  $('textarea')
+    .autogrow()
+    .keyup(function(){
+      keystrokes += 1;
+      if(!typing){
+        typing = true;
+      }
+      if(keystrokes > 99){
+        updateContent();
+      }
+    })
+    .keypress(function(){
+      if($('textarea').val()){
+        $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
+        $('#charcount .value').text( $('textarea').val().split('').length );
+      }
+    })
+    .focus()
+    .keypress();
   
   $(document).mousemove(function(){
     if(typing){
       typing = false;
-      //$('body').addClass('slacking');
-      saveNewVersion();
+      updateContent();
     }
   });
   
 })
 
-var saveNewVersion = function(){
+var updateContent = function(){
   $.ajax({
     type: 'POST',
     url: document.location.pathname,

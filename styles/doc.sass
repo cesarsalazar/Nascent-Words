@@ -12,7 +12,7 @@ body
     min-height: 850px
     @include centered(850px)
     overflow: hidden
-    
+    margin-top: 70px
     #title
       width: 700px
       border: 1px dashed $light_gray
@@ -55,22 +55,25 @@ body
     input.text
       font-family: "Lora", serif
   
-  #stats
+  #url, #stats
     font-family: "Metrophobic", sans-serif
-    position: fixed
-    width: 120px
-    right: 15px
-    top: 50px
-    color: $black
-    background: $light_gray
-    padding: 1em
-    @include round-corners(4px)
+    text-align: right
+    right: 30px
     p.label
       font-size: 0.7em
       text-transform: uppercase
+      margin-bottom: 0.2em
     p.value
       font-weight: bold
-      font-size: 1.5em
+      font-size: 1.1em
       margin-bottom: 1em
+  
+  #url
+    position: absolute
+    top: 15px
+  
+  #stats
+    position: fixed
+    top: 70px
   
   

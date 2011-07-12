@@ -22,7 +22,6 @@ if ENV['MONGOHQ_URL']
   MongoMapper.connect(DB_ENV)
 else
   log_dir = File.expand_path('../log/', __FILE__)
-  # FileUtils.mkdir_p(log_dir) unless File.exist?(log_dir)
   logger = Logger.new(log_dir + @db_log)
   
   LogBuddy.init(:logger => logger)

@@ -5,11 +5,13 @@
 #content
   %h1= @document.title
   %textarea{:spellcheck => "false"}= @document.versions.last.text
-  %audio{:src => "/audio/keystroke.mp3", :preload => "auto"}
+#url
+  %p.label Document link
+  %p.value= @document.short_url || request.url
 #stats
   #wordcount
-    %p.label Word count
+    %p.label Words
     %p.value 0
   #charcount
-    %p.label Character count
+    %p.label Characters
     %p.value 0
