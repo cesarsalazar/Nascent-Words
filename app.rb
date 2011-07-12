@@ -5,6 +5,9 @@ require 'sinatra/reloader' if development?
 require 'haml'
 require 'sass'
 require 'rdiscount'
+require 'net/http'
+require 'uri'
+require 'json'
 
 class Document 
   include MongoMapper::Document
