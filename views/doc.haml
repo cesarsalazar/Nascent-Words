@@ -4,7 +4,7 @@
   %script{:src => '/javascripts/doc.js', :type => 'text/javascript'}
 #content
   %h1= @document.title
-  %textarea= @document.versions.last.text
+  %textarea{:spellcheck => "false"}= @document.versions.last.text
   %audio{:src => "/audio/keystroke.mp3", :preload => "auto"}
 #stats
   #wordcount

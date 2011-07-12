@@ -1,10 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/config/init')
+require File.expand_path(File.dirname(__FILE__) + '/lib/bitly')
 require 'sinatra'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 require 'haml'
 require 'sass'
 require 'rdiscount'
+
+bit = BitLy.new
+url = bit.ly('http://betaworks.com/')
 
 class Document 
   include MongoMapper::Document
