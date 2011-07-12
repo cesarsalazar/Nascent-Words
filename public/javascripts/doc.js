@@ -32,12 +32,14 @@ $(function(){
     keystrokes += 1;
     if(!typing){
       typing = true;
-      $('body').removeClass('slacking');
+      //$('body').removeClass('slacking');
     }
     if(keystrokes > 99){
       saveNewVersion();
     }
   }).keypress(function(){
+    $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
+    $('#charcount .value').text( $('textarea').val().split('').length );
     if(sound){
       var num = keystrokes;
       $('#content').append('<audio id="audio'+num+'" src="/audio/keystroke.mp3" preload="auto"/>');
@@ -48,14 +50,12 @@ $(function(){
     };
   }).click(function(){
     $('body').removeClass('slacking');
-  }).focus();
+  }).focus().keypress();
   
   $(document).mousemove(function(){
     if(typing){
       typing = false;
-      $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
-      $('#charcount .value').text( $('textarea').val().split('').length );
-      $('body').addClass('slacking');
+      //$('body').addClass('slacking');
       saveNewVersion();
     }
   });
