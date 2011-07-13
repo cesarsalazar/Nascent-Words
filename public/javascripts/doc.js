@@ -40,15 +40,17 @@ $(function(){
       if(keystrokes > 99){
         updateContent();
       }
-    })
-    .keypress(function(){
       if($('textarea').val()){
         $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
-        $('#charcount .value').text( $('textarea').val().split('').length );
+        $('#charcount .value').text( $('textarea').val().length );
+      }
+      else{        
+        $('#wordcount .value').text('0');
+        $('#charcount .value').text('0');
       }
     })
     .focus()
-    .keypress();
+    .keyup();
   
   $(document).mousemove(function(){
     if(typing){
