@@ -5,8 +5,17 @@
   %h1 Nascent Words
   %ol
     %li Pick a title for your text.
-    %li Enjoy a simple, beautiful word processor that makes sure your document is saved all the time, keep track of the word count and alerts you when you're loosing focus.
+    %li Enjoy a simple, beautiful word processor that makes sure your document is always saved and keeps track of your progress.
     %li There's no step three.  
   %form{:method => 'POST'}
     %input.text{:type => 'text', :name => 'title'}
     %input.submit{:type => 'submit', :value => 'Start Writing'}
+  #footer
+    %ul
+      %li 
+        %span Created by: 
+        %a{:href => 'http://cesarsalazar.mx'} César Salazar.
+      %li
+        %span Terms of service: 1. The service is provided as is. 2. What's yours remains yours, forever. 3. There is no three.
+      %li
+        %span Privacy policy: Everything you write here is private, unless you make it public by sharing your "public link".
