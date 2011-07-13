@@ -11,10 +11,11 @@ require 'json'
 
 class Document 
   include MongoMapper::Document
-  key         :url,           String,   :required => true
-  key         :secret,        String,   :required => true
-  key         :short_url,     String
-  key         :title,         String
+  key         :url,             String,   :required => true
+  key         :secret,          String,   :required => true
+  key         :title,           String
+  key         :short_url,       String
+  key         :short_url_edit,  String
   many        :versions
 end
 
@@ -24,36 +25,32 @@ class Version
   key         :saved,         Time
 end
 
-get '/stylesheets/*' do
-  content_type 'text/css'
-  sass '../styles/'.concat(params[:splat].join.chomp('.css')).to_sym
-end
-
 get '/' do
   haml :index
 end
 
-get '/bitly' do
-  hash = uuid
-  
-  puts bitly
-end
-
 post '/' do
-  hash = uuid;
+  hash = uuid
+  secret = uuid(32)
   bitly = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=cesarsalazar&apiKey=R_f1646f39953fe388a735b86007f535b5&longUrl=#{URI.escape('http://nascentwords.com/'+hash)}" ) )['data']['url']
+  bitly_edit = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=cesarsalazar&apiKey=R_f1646f39953fe388a735b86007f535b5&longUrl=#{URI.escape('http://nascentwords.com/'+hash+'?secret='+secret)}" ) )['data']['url']
   @document = Document.new( :title => params[:title], 
                             :url => hash,
-                            :short_url => bitly, 
-                            :secret => uuid(32) )
+                            :short_url_edit => bitly_edit, 
+                            :short_url => bitly,
+                            :secret => secret )
   @document.versions.build(:text => '', :saved => Time.now)
   raise 500 unless @document.save!
-  redirect @document.url
+  redirect @document.url + '?secret=' + @document.secret
 end
 
 get '/:url' do
   @document = Document.where(:url => params[:url]).last
-  haml :doc
+  if @document.secret == params[:secret]
+    haml :edit 
+  else
+    haml :view
+  end
 end
 
 post '/:url' do
@@ -64,6 +61,11 @@ post '/:url' do
   raise 500 unless @document.save!
   content_type :json
   return [:status => 200, :response => "Great success!", :title => @document.title].to_json
+end
+
+get '/stylesheets/*' do
+  content_type 'text/css'
+  sass '../styles/'.concat(params[:splat].join.chomp('.css')).to_sym
 end
 
 def uuid(size=6)

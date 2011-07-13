@@ -1,0 +1,5 @@
+- content_for :head do
+  %link{:rel => 'stylesheet', :href => '/stylesheets/view.css', :type => 'text/css'}
+#content
+  %h1= @document.title
+  %div= @document.versions.last.text

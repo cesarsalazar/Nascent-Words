@@ -59,6 +59,8 @@ $(function(){
     }
   });
   
+  $('.url').text( function(){ return $(this).text().replace('http://','') });
+  
 })
 
 var updateContent = function(){
