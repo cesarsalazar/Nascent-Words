@@ -41,7 +41,7 @@ $(function(){
         updateContent();
       }
       if($('textarea').val()){
-        $('#wordcount .value').text( $('textarea').val().match(/\b/g).length/2 );
+        $('#wordcount .value').text( encodeString( $('textarea').val() ).split(/\w+/).length - 1 );
         $('#charcount .value').text( $('textarea').val().length );
       }
       else{        
@@ -90,3 +90,21 @@ var updateTitle = function(){
     }
   })
 }
+
+var encodeString = function (string) {    
+  string = string.replace(/\r\n/g,"\n");  
+  var utftext = "";   
+  for (var n=0, k=string.length; n < k; n++) {   
+    var c = string.charCodeAt(n);    
+    if (c < 128) {  
+      utftext += String.fromCharCode(c);  
+    } else {
+      // Just because Santiago would cry if make changes to the following line...
+      utftext += 'santiago_rocks';  
+    }  
+  }  
+  return utftext;  
+}
+
+
+
