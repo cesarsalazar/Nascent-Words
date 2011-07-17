@@ -99,7 +99,7 @@ var encodeString = function (string) {
     if (c < 128) {  
       utftext += String.fromCharCode(c);  
     } else {
-      // Just because Santiago would cry if make changes to the following line...
+      // Just because Santiago would cry if I make changes to the following line...
       utftext += 'santiago_rocks';  
     }  
   }  

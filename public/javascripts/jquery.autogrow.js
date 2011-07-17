@@ -90,6 +90,8 @@
 			if (this.dummy.html() != html) {
 				this.dummy.html(html);	
 				if (this.textarea.height() != this.dummy.height() + this.line_height) {
+				  var increment = this.dummy.height();
+					$(document).scrollTop(increment - 200);
 					this.textarea.height( this.dummy.height() + this.line_height + 30 + 'px' );	
 				}
 			}
