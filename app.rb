@@ -9,6 +9,10 @@ require 'net/http'
 require 'uri'
 require 'json'
 
+# Bitly
+BITLY_USER = ENV['BITLY_USER'] || @bitly_user
+BITLY_SECRET = ENV['BITLY_SECRET'] || @bitly_secret
+
 class Document 
   include MongoMapper::Document
   key         :url,             String,   :required => true
@@ -32,8 +36,8 @@ end
 post '/' do
   hash = uuid
   secret = uuid(32)
-  bitly = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=cesarsalazar&apiKey=R_f1646f39953fe388a735b86007f535b5&longUrl=#{URI.escape('http://nascentwords.com/'+hash)}" ) )['data']['url']
-  bitly_edit = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=cesarsalazar&apiKey=R_f1646f39953fe388a735b86007f535b5&longUrl=#{URI.escape('http://nascentwords.com/'+hash+'?secret='+secret)}" ) )['data']['url']
+  bitly = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=#{BITLY_USER}&apiKey=#{BITLY_SECRET}&longUrl=#{URI.escape('http://nascentwords.com/'+hash)}" ) )['data']['url']
+  bitly_edit = JSON.parse( Net::HTTP.get( "api.bit.ly", "/v3/shorten?login=#{BITLY_USER}&apiKey=#{BITLY_SECRET}&longUrl=#{URI.escape('http://nascentwords.com/'+hash+'?secret='+secret)}" ) )['data']['url']
   @document = Document.new( :title => params[:title], 
                             :url => hash,
                             :short_url_edit => bitly_edit, 
