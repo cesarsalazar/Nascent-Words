@@ -4,9 +4,9 @@ require 'mongo_mapper'
 require 'log_buddy'
 
 # Bitly
-@bitly = YAML.load_file("config/bitly.secret")
-@bitly_user = "" || @bitly["user"]
-@bitly_secret = "" || @bitly["secret"]
+# @bitly = YAML.load_file("config/bitly.secret")
+# @bitly_user = @bitly["user"]
+# @bitly_secret = @bitly["secret"]
 
 # Else read the local configuration
 @config = YAML.load_file("config/database.yaml")
